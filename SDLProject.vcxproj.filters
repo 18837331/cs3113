@@ -35,7 +35,7 @@
     <Image Include="ctg.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Image.png">
+    <Image Include="jump.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

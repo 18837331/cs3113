@@ -75,7 +75,7 @@ void Initialize() {
     
     
     MoveTexture = LoadTexture("ctg.png");
-    RotateTexture = LoadTexture("Image.png");
+    RotateTexture = LoadTexture("jump.png");
 
     glUseProgram(program.programID);
 
