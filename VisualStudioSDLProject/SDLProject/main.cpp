@@ -251,10 +251,10 @@ void Render() {
 
     if (Gameover()) {
         if (win) {
-            DrawText(&program, LoadTexture("font1.png"), "success", 0.5f, -0.25f, glm::vec3(0.0, 0.0, 0));
+            DrawText(&program, LoadTexture("font1.png"), "Mission Successful", 0.5f, -0.25f, glm::vec3(0.0, 0.0, 0));
         }
         else {
-            DrawText(&program, LoadTexture("font1.png"), "fail", 0.5f, -0.25f, glm::vec3(0.0, 0.0, 0));
+            DrawText(&program, LoadTexture("font1.png"), "Mission Failed", 0.5f, -0.25f, glm::vec3(0.0, 0.0, 0));
         }
     }
     SDL_GL_SwapWindow(displayWindow);
