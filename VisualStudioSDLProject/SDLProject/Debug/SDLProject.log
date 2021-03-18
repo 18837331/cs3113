@@ -1,2 +1,4 @@
 ﻿  main.cpp
+C:\Users\bowen\cs3113\VisualStudioSDLProject\SDLProject\main.cpp(184,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\bowen\cs3113\VisualStudioSDLProject\SDLProject\main.cpp(213,51): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
   SDLProject.vcxproj -> C:\Users\bowen\cs3113\VisualStudioSDLProject\SDLProject\Debug\SDLProject.exe
