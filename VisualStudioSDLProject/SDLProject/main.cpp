@@ -15,13 +15,15 @@
 #include "stb_image.h"
 #include "Entity.h"
 
-#define TILE_COUNT 20
+#define TILE_COUNT 17
+#define ENEMY_COUNT 3
 
 bool win;
 
 struct GameState {
     Entity* player;
     Entity* tiles;
+    Entity* enemies;
 
 };
 
@@ -61,7 +63,7 @@ bool Gameover();
 
 void Initialize() {
     SDL_Init(SDL_INIT_VIDEO);
-    displayWindow = SDL_CreateWindow("PONG!", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
+    displayWindow = SDL_CreateWindow("AI", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_OPENGL);
     SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
     SDL_GL_MakeCurrent(displayWindow, context);
 
@@ -90,66 +92,108 @@ void Initialize() {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
     state.player = new Entity();
+
     state.player->position = glm::vec3(0, 4, 0);
-    state.player->accerlation = glm::vec3(0.0f, -0.3f, 0.0f);
+    state.player->accerlation = glm::vec3(0, -9.81f, 0);
     state.player->speed = 1.0f;
-    state.player->textureID= LoadTexture("jump.png");
+    state.player->entityType = PLAYER;
+    state.player->textureID= LoadTexture("goal.png");
+
+   
+    state.enemies = new Entity[ENEMY_COUNT];
+    state.enemies[0].position = glm::vec3(3, 1, 0);
+    state.enemies[0].accerlation = glm::vec3(0, 0, 0);
+    state.enemies[0].entityType = ENEMY;
+    state.enemies[0].aiState = Flying;
+    state.enemies[0].textureID= LoadTexture("jump.png");
+
+
+    state.enemies[1].position = glm::vec3(3, 2, 0);
+    state.enemies[1].accerlation = glm::vec3(0, -9.81f, 0);
+    state.enemies[1].entityType = ENEMY;
+    state.enemies[1].aiState = CHASING;
+    state.enemies[1].textureID = LoadTexture("jump.png");
+
+
+    state.enemies[2].position = glm::vec3(-3, 4, 0);
+    state.enemies[2].accerlation = glm::vec3(0, -9.81f, 0);
+    state.enemies[2].entityType = ENEMY;
+    state.enemies[2].aiState = PATROLLING;
+    state.enemies[2].textureID = LoadTexture("jump.png");
+
 
     state.tiles=new Entity[TILE_COUNT];
 
     GLuint tileTextureId = LoadTexture("tileset.png");
 
-    state.tiles[0].textureID = LoadTexture("goal.png");;
-    state.tiles[0].position = glm::vec3(-1.0f, -3.25f, 0.0f); //goal
+    state.tiles[0].textureID = tileTextureId;
+    state.tiles[0].position = glm::vec3(-1.0f, -3.25f, 0.0f);
+    state.tiles[0].entityType = TILE;
     
     state.tiles[1].textureID = tileTextureId;
-    state.tiles[1].position = glm::vec3(-2.0f, -3.25f, 0.0f); 
+    state.tiles[1].position = glm::vec3(-2.0f, -3.25f, 0.0f);
+    state.tiles[1].entityType = TILE;
 
     state.tiles[2].textureID = tileTextureId;
     state.tiles[2].position = glm::vec3(-3.0f, -3.25f, 0.0f);
+    state.tiles[2].entityType = TILE;
 
     state.tiles[3].textureID = tileTextureId;
     state.tiles[3].position = glm::vec3(-4.0f, -3.25f, 0.0f);
+    state.tiles[3].entityType = TILE;
 
     state.tiles[4].textureID = tileTextureId;
     state.tiles[4].position = glm::vec3(-5.0f, -3.25f, 0.0f);
+    state.tiles[4].entityType = TILE;
 
     state.tiles[5].textureID = tileTextureId;
     state.tiles[5].position = glm::vec3(1.0f, -3.25f, 0.0f);
+    state.tiles[5].entityType = TILE;
 
     state.tiles[6].textureID = tileTextureId;
     state.tiles[6].position = glm::vec3(2.0f, -3.25f, 0.0f);
+    state.tiles[6].entityType = TILE;
 
     state.tiles[7].textureID = tileTextureId;
     state.tiles[7].position = glm::vec3(3.0f, -3.25f, 0.0f);
+    state.tiles[7].entityType = TILE;
 
     state.tiles[8].textureID = tileTextureId;
     state.tiles[8].position = glm::vec3(4.0f, -3.25f, 0.0f);
+    state.tiles[8].entityType = TILE;
 
     state.tiles[9].textureID = tileTextureId;
     state.tiles[9].position = glm::vec3(5.0f, -3.25f, 0.0f);
+    state.tiles[9].entityType = TILE;
 
     state.tiles[10].textureID = tileTextureId;
     state.tiles[10].position = glm::vec3(0.0f, -3.25f, 0.0f);
+    state.tiles[10].entityType = TILE; 
 
     state.tiles[11].textureID = tileTextureId;
     state.tiles[11].position = glm::vec3(-1.0f, 0.25f, 0.0f);
+    state.tiles[11].entityType = TILE;
 
     state.tiles[12].textureID = tileTextureId;
     state.tiles[12].position = glm::vec3(-2.0f, 0.25f, 0.0f);
+    state.tiles[12].entityType = TILE;
 
     state.tiles[13].textureID = tileTextureId;
     state.tiles[13].position = glm::vec3(-3.0f, 0.25f, 0.0f);
+    state.tiles[13].entityType = TILE;
 
     state.tiles[14].textureID = tileTextureId;
     state.tiles[14].position = glm::vec3(-4.0f, 0.25f, 0.0f);
+    state.tiles[14].entityType = TILE;
 
     state.tiles[15].textureID = tileTextureId;
     state.tiles[15].position = glm::vec3(-5.0f, 0.25f, 0.0f);
+    state.tiles[15].entityType = TILE;
 
 
     state.tiles[16].textureID = tileTextureId;
     state.tiles[16].position = glm::vec3(0.0f, 0.25f, 0.0f);
+    state.tiles[16].entityType = TILE;
 }
 
 void ProcessInput() {
@@ -159,17 +203,31 @@ void ProcessInput() {
         case SDL_QUIT:
         case SDL_WINDOWEVENT_CLOSE:
             gameIsRunning = false;
-            break; // SDL_KEYDOWN        
+            break;
+
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym) {
+            case SDLK_SPACE:
+                state.player->Jump();
+                break;
+
+            }
+            break;
         }
     }
+
+    state.player->velocity.x = 0;
+
+    // Check for pressed/held keys below
     const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-    if (keys[SDL_SCANCODE_LEFT]) {       
-        state.player->accerlation.x = -1.0f;
+    if (keys[SDL_SCANCODE_LEFT])
+    {
+        state.player->velocity.x = -3.0f;
     }
-    else if (keys[SDL_SCANCODE_RIGHT]) {
-        state.player->accerlation.x = 1.0f;
-       
+    else if (keys[SDL_SCANCODE_RIGHT])
+    {
+        state.player->velocity.x = 3.0f;
     }
 }
 
@@ -181,7 +239,7 @@ void DrawText(ShaderProgram* program, GLuint fontTextureID, std::string text, fl
     std::vector <float> vertices;
     std::vector <float> texCoords;
 
-    for (int i = 0; i < text.size(); i++) {
+     for(int i = 0; i < text.size(); i++) {
         int index = (int)text[i];
 
         float u = (float)(index % 16) / 16.0f;
@@ -216,24 +274,31 @@ void DrawText(ShaderProgram* program, GLuint fontTextureID, std::string text, fl
 
 }
 
+#define FIXED_TIMESTEP 0.0166666f
+float lastTicks = 0;
+float accumulator = 0.0f;
 
-float lastTicks = 0.0f;
 void Update() {
     float ticks = (float)SDL_GetTicks() / 1000.0f;
     float deltaTime = ticks - lastTicks;
     lastTicks = ticks;// Add (direction * units per second * elapsed time)
-    if (!Gameover()) {
-        state.player->Update(deltaTime);
-        for (int i = 0; i < 20; i++) {
-            state.tiles[i].Update(deltaTime);
-        }
+
+    deltaTime += accumulator;
+    if (deltaTime < FIXED_TIMESTEP) {
+        accumulator = deltaTime;
+        return;
     }
 
-    else {
-        state.player->accerlation = glm::vec3(0);
-        state.player->velocity = glm::vec3(0);
+    while (deltaTime >= FIXED_TIMESTEP) {
+        // Update. Notice it's FIXED_TIMESTEP. Not deltaTime
+        state.player->Update(FIXED_TIMESTEP, state.player, state.tiles, TILE_COUNT, state.enemies, ENEMY_COUNT);
+        for (int i = 0; i < ENEMY_COUNT; i++) {
+            state.enemies[i].Update(FIXED_TIMESTEP, state.player, state.tiles, TILE_COUNT, state.enemies, ENEMY_COUNT);
+        }
+        deltaTime -= FIXED_TIMESTEP;
     }
-    
+
+    accumulator = deltaTime;
 
 }
 
@@ -245,44 +310,49 @@ void Render() {
 
     state.player->Render(&program);
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < TILE_COUNT; i++) {
         state.tiles[i].Render(&program);
+    }
+
+    for (int i = 0; i < ENEMY_COUNT; i++) {
+        state.enemies[i].Render(&program);
     }
 
     if (Gameover()) {
         if (win) {
-            DrawText(&program, LoadTexture("font1.png"), "Mission Successful", 0.5f, -0.25f, glm::vec3(0.0, 0.0, 0));
+            DrawText(&program, LoadTexture("font1.png"), "YOU WIN", 0.5f, -0.25f, glm::vec3(-1.0, 0.0, 0));
         }
         else {
-            DrawText(&program, LoadTexture("font1.png"), "Mission Failed", 0.5f, -0.25f, glm::vec3(0.0, 0.0, 0));
+            DrawText(&program, LoadTexture("font1.png"), "YOU LOSE", 0.5f, -0.25f, glm::vec3(-1.0, 0.0, 0));
         }
     }
+
     SDL_GL_SwapWindow(displayWindow);
 }
 
 bool Gameover() {
-    if (state.player->position.y < -2.25) {
-        if (state.player->position.x >-1.5 && state.player->position.x<-0.5) {
-            win = true;
-        }
-        else {
-            win = false;
-        }
+    if (state.player->isActive == false) {
+        win = false;
         return true;
     }
+    else {
+        for(int i = 0; i < ENEMY_COUNT; i++) {
+            if (state.enemies[i].isActive) {
 
-    if (state.player->position.y < 1.25&& state.player->position.y>0.25) {
-        if (state.player->position.x<0.8) {
-            win = false;
-            return true;
+                return false;
+            }
+            
+
         }
-        
+        win = true;
+        return true;
     }
-
-
     
-    return false;
 }
+
+
+
+
 
 void Shutdown() {
     SDL_Quit();
