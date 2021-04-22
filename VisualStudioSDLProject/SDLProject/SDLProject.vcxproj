@@ -127,13 +127,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="Level3.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\SDL\SDL2_mixer\include\SDL_mixer.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Level1.h" />
+    <ClInclude Include="Level2.h" />
+    <ClInclude Include="Level3.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="glew32.dll">
@@ -146,10 +161,17 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="enemy.png" />
+    <Image Include="fly.png" />
     <Image Include="font1.png" />
     <Image Include="goal.png" />
     <Image Include="jump.png" />
+    <Image Include="player.png" />
     <Image Include="tileset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="bounce.wav" />
+    <Media Include="dooblydoo.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

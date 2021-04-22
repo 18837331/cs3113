@@ -24,6 +24,27 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShaderProgram.h">
@@ -32,15 +53,36 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\SDL\SDL2_mixer\include\SDL_mixer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="glew32.dll" />
     <CopyFileToFolders Include="SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="tileset.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="jump.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -50,5 +92,25 @@
     <Image Include="goal.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="enemy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fly.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="bounce.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="dooblydoo.mp3">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

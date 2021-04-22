@@ -1,2 +1,1 @@
 C:\Users\bowen\cs3113\VisualStudioSDLProject\SDLProject\Debug\SDLProject.exe
-C:\Users\bowen\cs3113\VisualStudioSDLProject\SDLProject\Debug\SDLProject.pdb
